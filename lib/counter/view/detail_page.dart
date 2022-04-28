@@ -1,6 +1,9 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
+import 'package:testing/counter/controller/addtocart_controller.dart';
 import 'package:testing/counter/controller/product_controller.dart';
 import 'package:testing/utils/style.dart';
 
@@ -11,13 +14,29 @@ class DetatilPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productController = Get.put(ProductController());
+    final AddToCartController addToCartController = Get.find();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: BackButton(
-          color: Colors.black,
+          color: colorBlack,
         ),
+        actions: [
+          Obx(
+            () => Badge(
+              position: cartBadgePosition,
+              badgeContent: Text('${addToCartController.orderCount.value}'),
+              showBadge:
+                  addToCartController.orderCount.value == 0 ? false : true,
+              badgeColor: Colors.red,
+              child: Icon(
+                Icons.shopping_cart,
+                color: colorBlack,
+              ),
+            ),
+          ),
+        ],
       ),
       backgroundColor: Colors.white,
       body: Container(
@@ -42,7 +61,7 @@ class DetatilPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      width: 300,
+                      width: 250,
                       child: Text(
                         productController
                                     .data[indexProduct].productName!.length >
@@ -76,7 +95,7 @@ class DetatilPage extends StatelessWidget {
                       productController.data[indexProduct].fullDesc == ''
                   ? 'Hello'
                   : productController.data[indexProduct].fullDesc!,
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: colorBlack),
             ),
             SizedBox(height: 50),
             Row(
@@ -93,13 +112,24 @@ class DetatilPage extends StatelessWidget {
                     child: Icon(Icons.store),
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    onPrimary: Colors.black,
-                    primary: detialPageButtonColor,
+                SizedBox(width: pageMargin),
+                Expanded(
+                  child: SizedBox(
+                    height: 50,
+                    width: 200,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        addToCartController.increment();
+                        addToCartController.addProductCart(indexProduct);
+                      },
+                      style: ElevatedButton.styleFrom(
+                          onPrimary: colorBlack,
+                          primary: detialPageButtonColor,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                      child: Text('Add To Cart'),
+                    ),
                   ),
-                  child: Text('Add To Cart'),
                 )
               ],
             ),

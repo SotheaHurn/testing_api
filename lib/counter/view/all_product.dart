@@ -1,7 +1,9 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
+import 'package:testing/counter/controller/addtocart_controller.dart';
 import 'package:testing/counter/controller/product_controller.dart';
 import 'package:testing/counter/view/detail_page.dart';
 import 'package:testing/utils/style.dart';
@@ -11,9 +13,25 @@ class AllProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final addToCartController = Get.put(AddToCartController());
     return Scaffold(
       appBar: AppBar(
         title: const Text('Products'),
+        actions: [
+          Obx(
+            () => Badge(
+              position: cartBadgePosition,
+              badgeContent: Text('${addToCartController.orderCount.value}'),
+              showBadge:
+                  addToCartController.orderCount.value == 0 ? false : true,
+              badgeColor: Colors.red,
+              child: Icon(
+                Icons.shopping_cart,
+                color: colorBlack,
+              ),
+            ),
+          ),
+        ],
       ),
       backgroundColor: backgroundColorProduct,
       body: GetBuilder<ProductController>(
@@ -82,7 +100,7 @@ class AllProduct extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: 85,
+              width: 70,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
