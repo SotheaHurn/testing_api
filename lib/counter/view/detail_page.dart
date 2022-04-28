@@ -81,14 +81,17 @@ class DetatilPage extends StatelessWidget {
             SizedBox(height: 50),
             Row(
               children: [
-                Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: detialPageButtonColor,
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: detialPageButtonColor,
+                    ),
+                    child: Icon(Icons.store),
                   ),
-                  child: Icon(Icons.store),
                 ),
                 ElevatedButton(
                   onPressed: () {},
