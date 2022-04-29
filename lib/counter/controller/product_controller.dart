@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:testing/counter/model/product_model.dart';
 import 'package:testing/counter/repository/product_repo.dart';

@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:dio/dio.dart';
 import 'package:testing/counter/model/product_model.dart';
 
 import '../../utils/constaint.dart';

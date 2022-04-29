@@ -18,22 +18,30 @@ class AddToCartController extends GetxController {
     for (int i = 0; i < productCart.length; i++) {
       if (productCart[i]['index'] == index) {
         productCart[i]['qty']++;
+        update();
         return;
       }
     }
     productCart.add({'index': index, 'qty': 1});
+    update();
   }
 
   void removeProductCart(int index) {
-    for (int i = 0; i < productCart.length - 1; i++) {
+    for (int i = 0; i < productCart.length; i++) {
       if (productCart[i]['index'] == index) {
         if (productCart[i]['qty'] == 1) {
           productCart.removeAt(i);
         } else {
-          productCart[i]['qty'] = productCart[i]['qty']--;
+          productCart[i]['qty']--;
         }
-        return;
       }
     }
+    update();
+  }
+
+  void deleteProductCart(int index) {
+    orderCount.value = orderCount.value - productCart[index]['qty'] as int;
+    productCart.removeAt(index);
+    update();
   }
 }

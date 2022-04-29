@@ -19,4 +19,6 @@ Color detialPageButtonColor = const Color.fromARGB(255, 177, 217, 249);
 
 double pageMargin = 20;
 
-BadgePosition cartBadgePosition = const BadgePosition(top: 5, start: 7);
+double cartProductViewHeight = 150;
+
+BadgePosition cartBadgePosition = const BadgePosition(top: 5, end: 5);

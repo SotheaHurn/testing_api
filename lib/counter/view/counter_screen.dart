@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:testing/counter/controller/counter_controller.dart';
 import 'package:testing/counter/controller/product_controller.dart';
 import 'package:testing/counter/view/all_product.dart';
-import 'package:testing/counter/view/sreen_a.dart';
 import 'package:testing/utils/style.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -28,7 +27,7 @@ class MyHomePage extends StatelessWidget {
         title: Text(title),
         actions: [
           IconButton(
-              onPressed: () => Get.to(() =>  AllProduct()),
+              onPressed: () => Get.to(() =>  const AllProduct()),
               icon: const Icon(Icons.arrow_right))
         ],
       ),

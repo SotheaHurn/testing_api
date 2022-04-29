@@ -1,10 +1,9 @@
-import 'package:badges/badges.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
 import 'package:testing/counter/controller/addtocart_controller.dart';
 import 'package:testing/counter/controller/product_controller.dart';
+import 'package:testing/utils/cart_widget.dart';
 import 'package:testing/utils/style.dart';
 
 class DetatilPage extends StatelessWidget {
@@ -22,20 +21,8 @@ class DetatilPage extends StatelessWidget {
         leading: BackButton(
           color: colorBlack,
         ),
-        actions: [
-          Obx(
-            () => Badge(
-              position: cartBadgePosition,
-              badgeContent: Text('${addToCartController.orderCount.value}'),
-              showBadge:
-                  addToCartController.orderCount.value == 0 ? false : true,
-              badgeColor: Colors.red,
-              child: Icon(
-                Icons.shopping_cart,
-                color: colorBlack,
-              ),
-            ),
-          ),
+        actions: const [
+          CartWidget(),
         ],
       ),
       backgroundColor: Colors.white,
@@ -60,7 +47,7 @@ class DetatilPage extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
+                    SizedBox(
                       width: 250,
                       child: Text(
                         productController
@@ -82,14 +69,19 @@ class DetatilPage extends StatelessWidget {
                     )
                   ],
                 ),
-                Text(
-                  '\$${productController.data[indexProduct].priceBeforeDiscount!}',
-                  style: textDetialStyle,
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      '\$${productController.data[indexProduct].priceBeforeDiscount!}',
+                      style: textDetialStyle,
+                    ),
+                  ),
                 ),
               ],
             ),
-            SizedBox(height: 20),
-            Text('Description :'),
+            const SizedBox(height: 20),
+            const Text('Description :'),
             Text(
               productController.data[indexProduct].fullDesc == null ||
                       productController.data[indexProduct].fullDesc == ''
@@ -97,7 +89,7 @@ class DetatilPage extends StatelessWidget {
                   : productController.data[indexProduct].fullDesc!,
               style: TextStyle(color: colorBlack),
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Row(
               children: [
                 InkWell(
@@ -109,7 +101,7 @@ class DetatilPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       color: detialPageButtonColor,
                     ),
-                    child: Icon(Icons.store),
+                    child: const Icon(Icons.store),
                   ),
                 ),
                 SizedBox(width: pageMargin),
@@ -127,7 +119,7 @@ class DetatilPage extends StatelessWidget {
                           primary: detialPageButtonColor,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
-                      child: Text('Add To Cart'),
+                      child: const Text('Add To Cart'),
                     ),
                   ),
                 )
