@@ -51,14 +51,14 @@ class AllProduct extends StatelessWidget {
         height: 100,
         decoration: BoxDecoration(
             color: const Color.fromARGB(255, 190, 226, 255),
-            borderRadius: BorderRadius.circular(20)),
+            borderRadius: BorderRadius.circular(circularCardView)),
         child: Row(
           children: [
             Container(
               width: 100,
               height: 100,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(circularCardView),
                   image: DecorationImage(
                       fit: BoxFit.cover, image: NetworkImage(image))),
             ),

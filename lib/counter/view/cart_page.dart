@@ -26,7 +26,6 @@ class CartPage extends StatelessWidget {
         ],
       ),
       body: ListView(
-        controller: scrollController,
         padding: EdgeInsets.symmetric(horizontal: pageMargin),
         children: [
           GetBuilder<AddToCartController>(
@@ -35,6 +34,7 @@ class CartPage extends StatelessWidget {
               height: cartProductViewHeight *
                   controller.productCart.length.toDouble(),
               child: ListView.builder(
+                controller: scrollController,
                 itemCount: controller.productCart.length,
                 itemBuilder: (context, index) => orderedProductView(index),
               ),
@@ -49,13 +49,17 @@ class CartPage extends StatelessWidget {
         height: cartProductViewHeight,
         padding: EdgeInsets.only(top: pageMargin),
         child: Container(
-          color: Colors.blue,
+          decoration: BoxDecoration(
+            color: backgroundColorProduct,
+            borderRadius: BorderRadius.circular(circularCardView),
+          ),
           child: Row(
             children: [
               Container(
-                height: 100,
-                width: 100,
+                height: cartProductViewHeight - 20,
+                width: cartProductViewHeight - 20,
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(circularCardView),
                   image: DecorationImage(
                       image: NetworkImage(
                         productController
@@ -67,7 +71,7 @@ class CartPage extends StatelessWidget {
                 ),
               ),
               Container(
-                width: 220,
+                width: 180,
                 margin: const EdgeInsets.only(left: 20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -79,7 +83,7 @@ class CartPage extends StatelessWidget {
                                       ['index']]
                                   .productName!
                                   .length >
-                              15
+                              20
                           ? productController
                               .data[addToCartController.productCart[index]
                                   ['index']]
