@@ -25,7 +25,7 @@ class AllProduct extends StatelessWidget {
         builder: (proController) => ListView.builder(
           itemCount: proController.data.length,
           itemBuilder: (context, index) => InkWell(
-            onTap: () => Get.to(() => DetatilPage(indexProduct: index)),
+            onTap: () => Get.to(DetatilPage(indexProduct: index)),
             child: productCard(
               image: proController.data[index].imageThumbnail!,
               name: proController.data[index].productName!,
