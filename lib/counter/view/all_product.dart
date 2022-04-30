@@ -1,28 +1,50 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:testing/counter/controller/addtocart_controller.dart';
+import 'package:testing/counter/controller/cart_controller.dart';
 import 'package:testing/counter/controller/product_controller.dart';
 import 'package:testing/counter/view/detail_page.dart';
 import 'package:testing/utils/cart_widget.dart';
 import 'package:testing/utils/style.dart';
 
 class AllProduct extends StatelessWidget {
-  const AllProduct({Key? key}) : super(key: key);
+  AllProduct({Key? key}) : super(key: key);
+  final cartController = Get.put(CartController());
+  final productController = Get.put(ProductController());
+  final scrollController = ScrollController();
+  void scrollListener() {
+    if (scrollController.offset >=
+            scrollController.position.maxScrollExtent / 2 &&
+        !scrollController.position.outOfRange) {
+      if (productController.hasNext) {
+        productController.getProduct();
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final addToCartController = Get.put(AddToCartController());
+    scrollController.addListener(scrollListener);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Products'),
-        actions: const [
+        actions: [
           CartWidget(),
+          IconButton(
+              onPressed: () {
+                log(productController.pagination.total.toString());
+              },
+              icon: Icon(
+                Icons.remove_red_eye,
+              ))
         ],
       ),
       backgroundColor: backgroundColorProduct,
       body: GetBuilder<ProductController>(
         init: ProductController(),
         builder: (proController) => ListView.builder(
+          controller: scrollController,
           itemCount: proController.data.length,
           itemBuilder: (context, index) => InkWell(
             onTap: () => Get.to(DetatilPage(indexProduct: index)),

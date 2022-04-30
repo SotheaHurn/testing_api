@@ -4,6 +4,9 @@ import 'package:testing/counter/repository/product_repo.dart';
 
 class ProductController extends GetxController {
   final _data = <Product>[].obs;
+  var pagination = Pagination(perPage: 10);
+  bool hasNext = true;
+
   final productRepo = Get.put(ProductRepository());
 
   List<Product> get data => _data.toList();
@@ -16,11 +19,16 @@ class ProductController extends GetxController {
 
   Future<String> getProduct() async {
     try {
-      final response = await productRepo.getProduct();
-      if (response != null) {
-        _data.assignAll(response);
-        update();
-        return 'Success';
+      if (pagination.currentPage == 0) _data.clear();
+      if (pagination.currentPage < pagination.lastPage) {
+        final response = await productRepo.getProduct(pagination);
+        if (response != null) {
+          _data.addAll(response['data']);
+          pagination = response['pagination'];
+          update();
+          hasNext = _data.length < pagination.total!;
+          return 'Success';
+        }
       }
     } catch (e) {
       print(e);

@@ -27,7 +27,7 @@ class MyHomePage extends StatelessWidget {
         title: Text(title),
         actions: [
           IconButton(
-              onPressed: () => Get.to(() =>  const AllProduct()),
+              onPressed: () => Get.to(() =>   AllProduct()),
               icon: const Icon(Icons.arrow_right))
         ],
       ),

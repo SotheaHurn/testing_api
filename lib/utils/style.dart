@@ -13,6 +13,11 @@ TextStyle textViewStyle =
 TextStyle textDetialNameStyle =
     const TextStyle(fontWeight: FontWeight.bold, fontSize: 30);
 
+TextStyle textSubTotalStyle = const TextStyle(fontSize: 20);
+
+TextStyle texTotalStyle =
+    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20);
+
 TextStyle textDetialStyle = const TextStyle(fontSize: 20);
 
 Color detialPageButtonColor = const Color.fromARGB(255, 177, 217, 249);

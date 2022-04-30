@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:testing/counter/controller/addtocart_controller.dart';
+import 'package:intl/intl.dart';
+import 'package:testing/counter/controller/cart_controller.dart';
 import 'package:testing/counter/controller/product_controller.dart';
 import 'package:testing/counter/view/all_product.dart';
 import 'package:testing/utils/cart_widget.dart';
@@ -9,7 +10,7 @@ import 'package:testing/utils/style.dart';
 class CartPage extends StatelessWidget {
   CartPage({Key? key}) : super(key: key);
 
-  final AddToCartController addToCartController = Get.find();
+  final CartController cartController = Get.find();
   final ProductController productController = Get.find();
   final ScrollController scrollController = ScrollController();
 
@@ -18,7 +19,7 @@ class CartPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-          onPressed: () => Get.to(const AllProduct()),
+          onPressed: () => Get.to( AllProduct()),
         ),
         title: const Text('Your Cart'),
         actions: const [
@@ -28,18 +29,99 @@ class CartPage extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: pageMargin),
         children: [
-          GetBuilder<AddToCartController>(
-            init: AddToCartController(),
-            builder: (controller) => SizedBox(
-              height: cartProductViewHeight *
-                  controller.productCart.length.toDouble(),
-              child: ListView.builder(
-                controller: scrollController,
-                itemCount: controller.productCart.length,
-                itemBuilder: (context, index) => orderedProductView(index),
+          GetBuilder<CartController>(
+            init: CartController(),
+            builder: (controller) => Column(
+              children: [
+                for (int index = 0;
+                    index < cartController.productCart.length;
+                    index++)
+                  orderedProductView(index),
+              ],
+            ),
+          ),
+          const SizedBox(height: 40),
+          GetBuilder<CartController>(
+            init: CartController(),
+            builder: (cartController) => Container(
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 255, 189, 189),
+                borderRadius: BorderRadius.circular(circularCardView),
+              ),
+              child: Container(
+                margin: const EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    for (int i = 0; i < cartController.productCart.length; i++)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            productController
+                                        .data[cartController.productCart[i]
+                                            ['index']]
+                                        .productName!
+                                        .length >
+                                    25
+                                ? productController
+                                    .data[cartController.productCart[i]
+                                        ['index']]
+                                    .productName!
+                                    .replaceRange(
+                                        20,
+                                        productController
+                                            .data[cartController.productCart[i]
+                                                ['index']]
+                                            .productName!
+                                            .length,
+                                        '...')
+                                : productController
+                                    .data[cartController.productCart[i]
+                                        ['index']]
+                                    .productName!,
+                            style: textSubTotalStyle,
+                          ),
+                          Text(
+                            calculateSubTotal(i),
+                            style: textSubTotalStyle,
+                          ),
+                        ],
+                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Total',
+                          style: texTotalStyle,
+                        ),
+                        Text(
+                          calculateTotal(),
+                          style: texTotalStyle,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
+          const SizedBox(height: 50),
+          SizedBox(
+            height: 50,
+            width: 200,
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                  onPrimary: colorBlack,
+                  primary: detialPageButtonColor,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10))),
+              child: const Text(
+                'Order',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -63,8 +145,7 @@ class CartPage extends StatelessWidget {
                   image: DecorationImage(
                       image: NetworkImage(
                         productController
-                            .data[addToCartController.productCart[index]
-                                ['index']]
+                            .data[cartController.productCart[index]['index']]
                             .imageThumbnail!,
                       ),
                       fit: BoxFit.cover),
@@ -79,44 +160,40 @@ class CartPage extends StatelessWidget {
                   children: [
                     Text(
                       productController
-                                  .data[addToCartController.productCart[index]
+                                  .data[cartController.productCart[index]
                                       ['index']]
                                   .productName!
                                   .length >
                               20
                           ? productController
-                              .data[addToCartController.productCart[index]
-                                  ['index']]
+                              .data[cartController.productCart[index]['index']]
                               .productName!
                               .replaceRange(
                                   15,
                                   productController
-                                      .data[addToCartController
-                                          .productCart[index]['index']]
+                                      .data[cartController.productCart[index]
+                                          ['index']]
                                       .productName!
                                       .length,
                                   '...')
                           : productController
-                              .data[addToCartController.productCart[index]
-                                  ['index']]
+                              .data[cartController.productCart[index]['index']]
                               .productName!,
                       style: textViewStyle,
                     ),
                     Text('\$' +
                         productController
-                            .data[addToCartController.productCart[index]
-                                ['index']]
+                            .data[cartController.productCart[index]['index']]
                             .priceBeforeDiscount!),
                     Row(
                       children: [
                         IconButton(
                           onPressed: () {
-                            addToCartController.removeProductCart(
-                                addToCartController.productCart[index]
-                                    ['index']);
-                            addToCartController.decrement();
-                            if (addToCartController.orderCount.value == 0) {
-                              Get.to(const AllProduct());
+                            cartController.removeProductCart(
+                                cartController.productCart[index]['index']);
+                            cartController.decrement();
+                            if (cartController.orderCount.value == 0) {
+                              Get.to(AllProduct());
                             }
                           },
                           icon: const Icon(
@@ -129,17 +206,15 @@ class CartPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
-                            addToCartController.productCart[index]['qty']
-                                .toString(),
+                            cartController.productCart[index]['qty'].toString(),
                             style: const TextStyle(fontSize: 30),
                           ),
                         ),
                         IconButton(
                           onPressed: () {
-                            addToCartController.addProductCart(
-                                addToCartController.productCart[index]
-                                    ['index']);
-                            addToCartController.increment();
+                            cartController.addProductCart(
+                                cartController.productCart[index]['index']);
+                            cartController.increment();
                           },
                           icon: const Icon(
                             Icons.add,
@@ -154,9 +229,9 @@ class CartPage extends StatelessWidget {
               Expanded(
                 child: IconButton(
                   onPressed: () {
-                    addToCartController.deleteProductCart(index);
-                    if (addToCartController.productCart.isEmpty) {
-                      Get.to(const AllProduct());
+                    cartController.deleteProductCart(index);
+                    if (cartController.productCart.isEmpty) {
+                      Get.to(AllProduct());
                     }
                   },
                   icon: const Icon(
@@ -169,4 +244,20 @@ class CartPage extends StatelessWidget {
           ),
         ),
       );
+  String calculateSubTotal(int i) => NumberFormat('\$###,##0.00').format(
+      (cartController.productCart[i]['qty'] *
+          double.parse(productController
+              .data[cartController.productCart[i]['index']]
+              .priceBeforeDiscount!)));
+
+  String calculateTotal() {
+    double total = 0;
+    for (int i = 0; i < cartController.productCart.length; i++) {
+      total += cartController.productCart[i]['qty'] *
+          double.parse(productController
+              .data[cartController.productCart[i]['index']]
+              .priceBeforeDiscount!);
+    }
+    return NumberFormat('\$###,##0.00').format(total);
+  }
 }

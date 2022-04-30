@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class AddToCartController extends GetxController {
+class CartController extends GetxController {
   var orderCount = 0.obs;
   var productCart = [].obs;
 
