@@ -12,6 +12,7 @@ class AllProduct extends StatelessWidget {
   AllProduct({Key? key}) : super(key: key);
   final cartController = Get.put(CartController());
   final productController = Get.put(ProductController());
+
   final scrollController = ScrollController();
   void scrollListener() {
     if (scrollController.offset >=
@@ -33,7 +34,7 @@ class AllProduct extends StatelessWidget {
           CartWidget(),
           IconButton(
               onPressed: () {
-                log(productController.pagination.total.toString());
+                log(productController.getProduct().toString());
               },
               icon: Icon(
                 Icons.remove_red_eye,

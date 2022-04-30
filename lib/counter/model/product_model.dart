@@ -5,7 +5,7 @@ List<Pagination> getPaginationModel(List<dynamic> data) =>
 
 class Pagination {
   final int? total;
-  final int perPage;
+  int perPage;
   int currentPage;
   int lastPage;
   final int? from;
