@@ -25,8 +25,9 @@ class ProductController extends GetxController {
         if (response != null) {
           _data.addAll(response['data']);
           pagination = response['pagination'];
-          update();
           hasNext = _data.length < pagination.total!;
+          // print(_data.length);
+          update();
           return 'Success';
         }
       }

@@ -15,8 +15,10 @@ class AllProduct extends StatelessWidget {
 
   final scrollController = ScrollController();
   void scrollListener() {
-    if (scrollController.offset >=
-            scrollController.position.maxScrollExtent / 2 &&
+    // print(scrollController.offset.toInt().toString() +
+    //     '\t' +
+    //     ((scrollController.position.maxScrollExtent / 2).toInt()).toString());
+    if (scrollController.offset >= scrollController.position.maxScrollExtent &&
         !scrollController.position.outOfRange) {
       if (productController.hasNext) {
         productController.getProduct();
@@ -30,15 +32,8 @@ class AllProduct extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Products'),
-        actions: [
+        actions: const [
           CartWidget(),
-          IconButton(
-              onPressed: () {
-                log(productController.getProduct().toString());
-              },
-              icon: Icon(
-                Icons.remove_red_eye,
-              ))
         ],
       ),
       backgroundColor: backgroundColorProduct,
@@ -46,6 +41,7 @@ class AllProduct extends StatelessWidget {
         init: ProductController(),
         builder: (proController) => ListView.builder(
           controller: scrollController,
+          physics: const AlwaysScrollableScrollPhysics(),
           itemCount: proController.data.length,
           itemBuilder: (context, index) => InkWell(
             onTap: () => Get.to(DetatilPage(indexProduct: index)),

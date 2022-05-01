@@ -1,8 +1,5 @@
 import 'package:testing/utils/constaint.dart';
 
-List<Pagination> getPaginationModel(List<dynamic> data) =>
-    List<Pagination>.from(data.map((json) => Pagination.fromJson(json)));
-
 class Pagination {
   final int? total;
   int perPage;

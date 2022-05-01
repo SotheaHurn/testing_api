@@ -1,8 +1,9 @@
+import 'package:get/get.dart';
 import 'package:testing/counter/model/product_model.dart';
 
 import '../../utils/constaint.dart';
 
-class ProductRepository {
+class ProductRepository extends GetxController {
   Future<Map<String, dynamic>?> getProduct(Pagination pagination) async {
     try {
       final respone = await dio.post('/get_newest_product', queryParameters: {
