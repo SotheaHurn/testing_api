@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:testing/counter/controller/product_controller.dart';
+import 'package:testing/Product/controller/product_controller.dart';
 import 'package:testing/utils/style.dart';
 
 import '../controller/counter_controller.dart';
@@ -28,7 +28,7 @@ class MyHomePage extends StatelessWidget {
         title: Text(title),
         actions: [
           IconButton(
-              onPressed: () => Get.to(() =>   AllProduct()),
+              onPressed: () => Get.to(() => AllProduct()),
               icon: const Icon(Icons.arrow_right))
         ],
       ),
