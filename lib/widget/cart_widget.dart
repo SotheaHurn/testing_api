@@ -1,7 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:testing/counter/controller/cart_controller.dart';
+import 'package:testing/product/controller/cart_controller.dart';
 import 'package:testing/utils/style.dart';
 
 import '../product/view/cart_page.dart';
