@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:testing/counter/view/all_product.dart';
+import 'package:testing/product/view/all_product.dart';
 
 void main() {
   runApp(const MyApp());

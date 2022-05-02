@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:testing/counter/controller/counter_controller.dart';
 import 'package:testing/utils/style.dart';
+
+import '../controller/counter_controller.dart';
 
 class ScreenA extends StatelessWidget {
   const ScreenA({Key? key}) : super(key: key);

@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:testing/counter/controller/cart_controller.dart';
 import 'package:testing/counter/controller/product_controller.dart';
-import 'package:testing/counter/view/all_product.dart';
 import 'package:testing/utils/cart_widget.dart';
 import 'package:testing/utils/style.dart';
+
+import 'all_product.dart';
 
 class CartPage extends StatelessWidget {
   CartPage({Key? key}) : super(key: key);

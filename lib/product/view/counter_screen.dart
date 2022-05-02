@@ -2,10 +2,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:testing/counter/controller/counter_controller.dart';
 import 'package:testing/counter/controller/product_controller.dart';
-import 'package:testing/counter/view/all_product.dart';
 import 'package:testing/utils/style.dart';
+
+import '../controller/counter_controller.dart';
+import 'all_product.dart';
 
 class MyHomePage extends StatelessWidget {
   final String title;

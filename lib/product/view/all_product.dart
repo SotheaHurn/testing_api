@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testing/counter/controller/cart_controller.dart';
 import 'package:testing/counter/controller/product_controller.dart';
-import 'package:testing/counter/view/detail_page.dart';
 import 'package:testing/utils/cart_widget.dart';
 import 'package:testing/utils/style.dart';
+
+import 'detail_page.dart';
 
 class AllProduct extends StatelessWidget {
   AllProduct({Key? key}) : super(key: key);
