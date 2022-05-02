@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
-import 'package:testing/counter/model/product_model.dart';
 import 'package:testing/counter/repository/product_repo.dart';
+
+import '../model/product_model.dart';
 
 class ProductController extends GetxController {
   final _data = <Product>[].obs;
@@ -23,10 +24,9 @@ class ProductController extends GetxController {
       if (pagination.currentPage < pagination.lastPage) {
         final response = await productRepo.getProduct(pagination);
         if (response != null) {
-          _data.addAll(response['data']);
+          _data.assignAll(response['data']);
           pagination = response['pagination'];
           hasNext = _data.length < pagination.total!;
-          // print(_data.length);
           update();
           return 'Success';
         }

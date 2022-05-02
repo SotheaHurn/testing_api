@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testing/counter/controller/cart_controller.dart';
 import 'package:testing/counter/controller/product_controller.dart';
-import 'package:testing/utils/cart_widget.dart';
+import 'package:testing/widget/cart_widget.dart';
 import 'package:testing/utils/style.dart';
 
-import 'detail_page.dart';
+import 'product_detail/detail_page.dart';
 
 class AllProduct extends StatelessWidget {
   AllProduct({Key? key}) : super(key: key);
@@ -16,9 +16,6 @@ class AllProduct extends StatelessWidget {
 
   final scrollController = ScrollController();
   void scrollListener() {
-    // print(scrollController.offset.toInt().toString() +
-    //     '\t' +
-    //     ((scrollController.position.maxScrollExtent / 2).toInt()).toString());
     if (scrollController.offset >= scrollController.position.maxScrollExtent &&
         !scrollController.position.outOfRange) {
       if (productController.hasNext) {

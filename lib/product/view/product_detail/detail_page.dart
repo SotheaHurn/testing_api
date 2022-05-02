@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
 import 'package:testing/counter/controller/cart_controller.dart';
 import 'package:testing/counter/controller/product_controller.dart';
-import 'package:testing/utils/cart_widget.dart';
+import 'package:testing/widget/cart_widget.dart';
 import 'package:testing/utils/style.dart';
 
 class DetatilPage extends StatelessWidget {

@@ -21,7 +21,7 @@ class CartWidget extends StatelessWidget {
         child: IconButton(
           onPressed: addToCartController.orderCount.value == 0
               ? null
-              : () => Get.to(CartPage()),
+              : () => Get.to(() => CartPage()),
           icon: Icon(
             Icons.shopping_cart,
             color: colorBlack,

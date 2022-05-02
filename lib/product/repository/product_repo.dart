@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:testing/counter/model/product_model.dart';
 
 import '../../utils/constaint.dart';
+import '../model/product_model.dart';
 
 class ProductRepository extends GetxController {
   Future<Map<String, dynamic>?> getProduct(Pagination pagination) async {
