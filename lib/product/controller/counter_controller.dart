@@ -4,14 +4,15 @@ import '../model/counter_model.dart';
 
 class CounterController extends GetxController {
   RxString name = 'Sothea'.obs;
+  var activeIndex = 0.obs;
 
   void change() {
     name('Visal');
     update();
   }
 
-  void increment() {
-    // counter++;
+  void setValue(int index) {
+    activeIndex.value = index;
     update(); // look here!
   }
 

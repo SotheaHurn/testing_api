@@ -5,6 +5,7 @@ import '../model/product_model.dart';
 
 class ProductController extends GetxController {
   final _data = <Product>[].obs;
+  final _isLoading = false.obs;
   var pagination = Pagination(perPage: 10);
   bool hasNext = true;
 
@@ -18,22 +19,26 @@ class ProductController extends GetxController {
     super.onInit();
   }
 
-  Future<String> getProduct() async {
+  Future<void> getProduct() async {
     try {
       if (pagination.currentPage == 0) _data.clear();
       if (pagination.currentPage < pagination.lastPage) {
+        print(_isLoading.value);
+        if (_isLoading.value) return Future.value();
+        _isLoading.value = true;
         final response = await productRepo.getProduct(pagination);
         if (response != null) {
           _data.addAll(response['data']);
           pagination = response['pagination'];
           hasNext = _data.length < pagination.total!;
           update();
-          return 'Success';
+        } else {
+          hasNext = false;
         }
       }
     } catch (e) {
       print(e);
     }
-    return 'Error';
+    _isLoading.value = false;
   }
 }
