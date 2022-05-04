@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
-import 'package:testing/product/controller/cart_controller.dart';
+import 'package:testing/product/controller/product_cart_controller.dart';
 import 'package:testing/product/controller/product_controller.dart';
 import 'package:testing/widget/cart_widget.dart';
 import 'package:testing/utils/style.dart';

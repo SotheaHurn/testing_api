@@ -1,10 +1,10 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:testing/product/controller/cart_controller.dart';
+import 'package:testing/product/controller/product_cart_controller.dart';
 import 'package:testing/utils/style.dart';
 
-import '../product/view/cart_page.dart';
+import '../product/view/product_cart_screen.dart';
 
 class CartWidget extends StatelessWidget {
   const CartWidget({Key? key}) : super(key: key);
