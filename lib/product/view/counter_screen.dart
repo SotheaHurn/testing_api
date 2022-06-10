@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:testing/Product/controller/product_controller.dart';
 import 'package:testing/utils/style.dart';
@@ -70,12 +69,12 @@ void waiting() {
   //     snackPosition: SnackPosition.BOTTOM,
   //     overlayBlur: 0.1);
 
-  Fluttertoast.showToast(
-      msg: "This is Center Short Toast",
-      toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.SNACKBAR,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Colors.red,
-      textColor: Colors.white,
-      fontSize: 16.0);
+  // Fluttertoast.showToast(
+  //     msg: "This is Center Short Toast",
+  //     toastLength: Toast.LENGTH_LONG,
+  //     gravity: ToastGravity.SNACKBAR,
+  //     timeInSecForIosWeb: 1,
+  //     backgroundColor: Colors.red,
+  //     textColor: Colors.white,
+  //     fontSize: 16.0);
 }
