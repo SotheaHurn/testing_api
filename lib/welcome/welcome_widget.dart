@@ -3,7 +3,6 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:testing/welcome/controller/welcome_controller.dart';
-import 'package:testing/welcome/welcome_sreen.dart';
 
 class WelcomeWidget extends StatelessWidget {
   final Widget text;
